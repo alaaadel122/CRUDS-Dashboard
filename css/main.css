@@ -1,0 +1,26 @@
+.btnContainer {
+     /* width: fit-content; */
+}
+
+img {
+     width: 100%;
+}
+
+.product-img {
+     width: 45px;
+     height: 45px;
+     border-radius: 50%;
+}
+
+.product-img img {
+     width: 80%;
+     overflow: hidden;
+}
+
+.productTable {
+     border-radius: 10px;
+     border: 1px solid #cccaca;
+     box-shadow: 9px 6px 5px 0px rgba(92, 92, 92, 0.75);
+     -webkit-box-shadow: 9px 6px 5px 0px rgba(92, 92, 92, 0.75);
+     -moz-box-shadow: 9px 6px 5px 0px rgba(92, 92, 92, 0.75);
+}

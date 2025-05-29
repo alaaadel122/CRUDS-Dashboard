@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Dashboard</title>
+     <link rel="stylesheet" href="./css/all.min.css">
+     <link rel="stylesheet" href="./css/bootstrap.min.css">
+     <link rel="stylesheet" href="./css/main.css">
+     <link rel="stylesheet" href="./css/media.css">
+</head>
+
+<body>
+     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body  fixed-top" data-bs-theme="dark">
+          <div class="container">
+               <a class="navbar-brand" href="#">Dashboard</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse me-auto" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                         <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="#">Home</a>
+                         </li>
+                         <!-- <li class="nav-item">
+                              <a class="nav-link" href="#">Features</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#"></a>
+                         </li> -->
+                    </ul>
+               </div>
+          </div>
+     </nav>
+     <main>
+          <div class="container mt-5 pt-5">
+               <div class="btnContainer  d-flex justify-content-between ">
+                    <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal"
+                         data-bs-target="#addProductModel">
+                         Add Product
+                    </button>
+                    <input type="search" id="search" placeholder="Search..." oninput="searchFun()" class="form-control w-75  ms-2">
+               </div>
+               <!--add Modal -->
+               <div class="modal fade" id="addProductModel" tabindex="-1" aria-labelledby="addProductModelLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                         <div class="modal-content">
+                              <div class="modal-header">
+                                   <h1 class="modal-title fs-5" id="addProductModelLabel">Add Product</h1>
+                                   <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                   <div class="productForm">
+                                        <input class="form-control mb-2" type="text" id="productName"
+                                             placeholder="Product Name" aria-label="default input example">
+                                        <input class="form-control mb-2" type="text" id="productPrice"
+                                             placeholder="Product Price" aria-label="default input example">
+                                        <input class="form-control mb-2" type="text" id="productDesc"
+                                             placeholder="Product Description" aria-label="default input example">
+                                        <input class="form-control mb-2" type="file" id="productImg">
+                                        <select class="form-select" id="productCat" aria-label="Choose Category">
+                                             <option>Choose Category</option>
+                                             <option value="PCs">PCs</option>
+                                             <option value="Mobiles">Mobiles</option>
+                                             <option value="Electronics">Electronics</option>
+                                        </select>
+                                   </div>
+                              </div>
+                              <div class="modal-footer">
+                                   <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                        onclick="addProduct()">Add
+                                        product</button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <div class="productTable container mt-5 ">
+               <table class="table  table-striped text-center">
+                    <thead>
+                         <tr>
+                              <th scope="col">No.</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Product Price</th>
+                              <th scope="col">Product Category</th>
+                              <th scope="col">Product Description</th>
+                              <th scope="col">Action</th>
+
+                         </tr>
+                    </thead>
+                    <tbody id="productData">
+
+                    </tbody>
+               </table>
+          </div>
+          <!--Delete Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1"  aria-labelledby="deleteModalLabel"
+                         aria-hidden="true">
+                         <div class="modal-dialog">
+                              <div class="modal-content">
+                                   <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                             aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                        Want to delete? 
+                                   </div>
+                                   <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" id="deleteBtn" data-bs-dismiss="modal">Delete</button>
+                                   </div>
+                              </div>
+                         </div>
+          </div>
+
+           <!-- update Modal -->
+          <div class="modal fade" id="updateModal" tabindex="-1"  aria-labelledby="updateModalLabel"
+                         aria-hidden="true">
+                         <div class="modal-dialog">
+                              <div class="modal-content">
+                                   <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="updateModalLabel">Update Product</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                             aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body">
+                                         <div class="productForm">
+                                        <input class="form-control mb-2" type="text" id="pName"
+                                             placeholder="Product Name" aria-label="default input example">
+                                        <input class="form-control mb-2" type="text" id="pPrice"
+                                             placeholder="Product Price" aria-label="default input example">
+                                        <input class="form-control mb-2" type="text" id="pDesc"
+                                             placeholder="Product Description" aria-label="default input example">
+                                        <input class="form-control mb-2" type="file" id="productImg">
+                                        <select class="form-select" id="pCat" aria-label="Choose Category">
+                                             <option>Choose Category</option>
+                                             <option value="PCs">PCs</option>
+                                             <option value="Mobiles">Mobiles</option>
+                                             <option value="Electronics">Electronics</option>
+                                        </select>
+                                   </div> 
+                                   </div>
+                                   <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success" id="updateBtn" data-bs-dismiss="modal">Update</button>
+                                   </div>
+                              </div>
+                         </div>
+          </div>
+     </main>
+     <script src="./js/main.js"></script>
+     <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
